@@ -1,1 +1,21 @@
-backend
+backend 체크리스트
+
+[ ] 프로젝트 초기 설정: Spring Web, Spring Data JPA, H2/MySQL, Lombok 의존성 추가.
+
+[ ] Domain/Entity 설계: Todo 객체(id, title, completed, createdAt 등) 생성.
+
+[ ] Repository 인터페이스: JPA를 이용해 DB에 접근하는 기능 구현.
+
+[ ] Service 레이어: 비즈니스 로직(할 일 추가 시 공백 검사 등) 구현.
+
+[ ] REST Controller 구현: - GET /api/todos: 목록 조회
+
+POST /api/todos: 할 일 생성
+
+PATCH /api/todos/{id}: 완료 상태 토글
+
+DELETE /api/todos/{id}: 삭제
+
+[ ] CORS 설정: WebMvcConfigurer를 통해 프론트엔드 포트(3000) 허용.
+
+[ ] API 테스트: Postman 또는 Swagger로 API가 정상 작동하는지 확인.

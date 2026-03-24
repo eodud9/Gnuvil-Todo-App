@@ -1,3 +1,19 @@
+frontend 체크리스트
+
+[ ] 환경 세팅: Vite 또는 CRA로 프로젝트 생성 및 axios 설치.
+
+[ ] 컴포넌트 구조 설계: TodoInput, TodoList, TodoItem 등으로 분리.
+
+[ ] 상태 관리 (State): useState를 사용하여 할 일 목록 관리.
+
+[ ] API 연동 (Axios): - useEffect 내에서 초기 목록 가져오기.
+
+입력/삭제/체크 시 백엔드 API 호출 후 화면 갱신.
+
+[ ] 조건부 렌더링: 할 일이 없을 때 "할 일이 없어요" 문구 출력 또는 완료된 항목에 취소선 긋기.
+
+[ ] 에러 핸들링: 서버 연결 실패 시 사용자에게 알림 띄우기.
+
 API 명세서
 
 전체 조회: GET - /api/todos
