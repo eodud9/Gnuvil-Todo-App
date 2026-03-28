@@ -1,21 +1,21 @@
 const todos = [
-  { id: 1, title: "Eat Chicken" },
-  { id: 2, title: "Drink Coke" },
-  { id: 3, title: "Study Web Development" },
+  { id: 1, title: "치킨 먹기" },
+  { id: 2, title: "콜라 마시기" },
+  { id: 3, title: "웹개발 스터디하기" },
 ];
 
 function App() {
   return (
     <div className="w-full min-h-screen bg-stone-100 flex flex-col items-center p-10 font-sans">
       {/* 타이틀 영역 */}
-      <h1 className="text-5xl font-black text-stone-800 mb-10 tracking-tight">Your To Do</h1>
+      <h1 className="text-5xl font-black text-stone-800 mb-10 tracking-tight">오늘의 할 일</h1>
 
       <div className="w-full max-w-md flex flex-col gap-5">
         {/* 할 일 추가 영역 */}
         <div className="flex gap-3 items-center bg-white p-2 rounded-lg shadow-md border border-stone-200">
           <input
             type="text"
-            placeholder="Add a new task"
+            placeholder="할 일을 추가해보세요!"
             className="flex-1 px-4 py-2 outline-none text-stone-700 bg-transparent"
           />
           <button
