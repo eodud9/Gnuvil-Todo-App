@@ -1,17 +1,17 @@
-package com.gnuvil.todo_list;
+package com.gnuvil.todo_list.controller;
 
+import com.gnuvil.todo_list.domain.Todo;
+import com.gnuvil.todo_list.service.TodoService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.plaf.basic.BasicDesktopIconUI;
 import java.util.List;
 
 
 @RestController
 @RequestMapping("/api/todos")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "http://localhost:5173") //외부 도메인 허용
 public class TodoController {
 
     private final TodoService todoService;

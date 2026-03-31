@@ -1,4 +1,4 @@
-package com.gnuvil.todo_list;
+package com.gnuvil.todo_list.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

@@ -1,5 +1,6 @@
-package com.gnuvil.todo_list;
+package com.gnuvil.todo_list.repository;
 
+import com.gnuvil.todo_list.domain.Todo;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
