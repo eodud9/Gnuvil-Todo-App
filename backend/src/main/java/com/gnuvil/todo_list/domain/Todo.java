@@ -1,12 +1,12 @@
 package com.gnuvil.todo_list.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+
+import static jakarta.persistence.FetchType.*;
 
 @Entity
 @Getter @Setter
@@ -19,7 +19,12 @@ public class Todo {
     private boolean completed;
     private LocalDateTime createdAt;
 
-    public void setComplete(boolean completed){
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public void setComplete(boolean completed) {
+
         this.completed = completed;
     }
 

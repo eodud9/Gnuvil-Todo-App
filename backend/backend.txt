@@ -18,8 +18,7 @@ DELETE /api/todos/{id}: 삭제
 
 회원가입
 
-로그인 페이지 이메일 비밀번호
-
+로그인 페이지 (이메일 + 비밀번호)
 
 [ ] CORS 설정: WebMvcConfigurer를 통해 프론트엔드 포트(3000) 허용.
 
