@@ -47,4 +47,10 @@ public class TodoService {
         todoRepository.remove(id);
     }
 
+    @Transactional
+    public void changeTodo(Long id,String name) {
+        Todo findTodo = todoRepository.findById(id);
+        findTodo.setName(name);
+    }
+
 }

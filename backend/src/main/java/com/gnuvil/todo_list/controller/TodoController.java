@@ -16,6 +16,10 @@ public class TodoController {
 
     private final TodoService todoService;
 
+    public record TodoRequest(String name){
+
+    }
+
     @GetMapping
     public List<Todo> getTodos() {
         return todoService.findAll();
@@ -24,6 +28,11 @@ public class TodoController {
     @PostMapping
     public Long createTodo(@RequestBody Todo todo) {
         return todoService.join(todo);
+    }
+
+    @PutMapping("/{id}")
+    public void changeTodo(@PathVariable Long id, @RequestBody TodoRequest request){
+        todoService.changeTodo(id, request.name());
     }
 
     @PatchMapping("/{id}")

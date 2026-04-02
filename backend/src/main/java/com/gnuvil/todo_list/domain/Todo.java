@@ -24,7 +24,6 @@ public class Todo {
     private User user;
 
     public void setComplete(boolean completed) {
-
         this.completed = completed;
     }
 
