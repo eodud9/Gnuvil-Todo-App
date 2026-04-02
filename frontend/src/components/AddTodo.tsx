@@ -1,14 +1,17 @@
 import { useState } from "react";
+import { useTodoMutation } from "../hooks/useTodoMutation";
 
-export default function AddTodo({ addTodo }: { addTodo: (title: string) => void }) {
+export default function AddTodo() {
   const [userInput, setUserInput] = useState("");
+
+  const { addTodoMutation } = useTodoMutation();
 
   return (
     <form
       className="flex gap-3 items-center bg-white p-2 rounded-2xl shadow-md border border-stone-200 hover:border-stone-300 focus:border-stone-300 transition-all"
       onSubmit={(e) => {
         e.preventDefault();
-        addTodo(userInput);
+        addTodoMutation.mutate(userInput);
         setUserInput("");
       }}
     >

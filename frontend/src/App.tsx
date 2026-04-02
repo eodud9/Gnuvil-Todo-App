@@ -2,8 +2,7 @@ import { createBrowserRouter, Outlet, RouterProvider } from "react-router";
 import TodoPage from "./pages/TodoPage";
 import AuthPage from "./pages/AuthPage";
 import Header from "./components/Header";
-import LoginForm from "./components/LoginForm";
-import SignupForm from "./components/SignupForm";
+import AuthForm from "./components/AuthForm";
 
 const router = createBrowserRouter([
   {
@@ -25,8 +24,8 @@ const router = createBrowserRouter([
         path: "auth",
         element: <AuthPage />,
         children: [
-          { path: "login", element: <LoginForm /> },
-          { path: "signup", element: <SignupForm /> },
+          { path: "login", element: <AuthForm auth="login" /> },
+          { path: "signup", element: <AuthForm auth="signup" /> },
         ],
       },
     ],

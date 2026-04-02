@@ -2,39 +2,19 @@ import { useState } from "react";
 import AddTodo from "../components/AddTodo";
 import EditTodo from "../components/EditTodo";
 import TodoItem from "../components/TodoItem";
-
-interface Todo {
-  id: number;
-  title: string;
-}
+import { useQuery } from "@tanstack/react-query";
+import { getTodos } from "../api/todos";
+import type { Todo } from "../types/todos";
 
 export default function TodoPage() {
   const [isEdit, setIsEdit] = useState<number | null>(null);
-  const [todos, setTodos] = useState<Todo[]>([]);
+  //const [todos, setTodos] = useState<Todo[]>([]);
 
-  function addTodo(title: string) {
-    if (title.trim() === "") return;
-    setTodos((prevTodos) => {
-      return [...prevTodos, { id: Date.now(), title }];
-    });
-  }
-
-  function deleteTodo(id: number) {
-    setTodos((prevTodos) => {
-      return prevTodos.filter((todo) => todo.id !== id);
-    });
-  }
-
-  function editTodo(id: number, title: string) {
-    if (title.trim() === "") return;
-    setTodos((prevTodos) => {
-      return prevTodos.map((todo) => {
-        return todo.id === id ? { ...todo, title: title } : todo;
-      });
-    });
-
-    setIsEdit(null);
-  }
+  const { data: todos } = useQuery<Todo[]>({
+    queryKey: ["todos"],
+    queryFn: getTodos,
+    initialData: [],
+  });
 
   function startEdit(todo: Todo) {
     setIsEdit(todo.id);
@@ -48,7 +28,7 @@ export default function TodoPage() {
 
         <div className="w-full max-w-md flex flex-col gap-5">
           {/* 할 일 추가 영역 */}
-          <AddTodo addTodo={addTodo} />
+          <AddTodo />
           {/* 할 일 목록 영역 */}
           <ul className="mt-10 space-y-3">
             {todos.length > 0 ? (
@@ -57,11 +37,7 @@ export default function TodoPage() {
                   key={t.id}
                   className="group w-full p-4 border border-stone-200 hover:border-stone-300 transition-colors rounded-2xl flex items-center justify-between shadow-md"
                 >
-                  {isEdit === t.id ? (
-                    <EditTodo todo={t} editTodo={editTodo} />
-                  ) : (
-                    <TodoItem startEdit={startEdit} deleteTodo={deleteTodo} todo={t} />
-                  )}
+                  {isEdit === t.id ? <EditTodo todo={t} /> : <TodoItem startEdit={startEdit} todo={t} />}
                 </li>
               ))
             ) : (
