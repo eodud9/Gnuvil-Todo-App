@@ -1,10 +1,13 @@
 package com.gnuvil.todo_list.service;
 
+import com.gnuvil.todo_list.config.SecurityConfig;
 import com.gnuvil.todo_list.domain.LoginRequest;
 import com.gnuvil.todo_list.domain.LoginResponse;
+import com.gnuvil.todo_list.domain.SignupRequest;
 import com.gnuvil.todo_list.domain.User;
 import com.gnuvil.todo_list.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,10 +20,15 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public Long join(User user) { //회원가입
-        validateDuplicateEmail(user.getEmail());
+    public Long join(SignupRequest request) { //회원가입
+        validateDuplicateEmail(request.getEmail());
+        User user = new User();
+        user.setEmail(request.getEmail());
+        user.setName(request.getName());
+        user.setPasswd(passwordEncoder.encode(request.getPasswd()));
         userRepository.save(user);
         return user.getId();
     }
@@ -29,7 +37,7 @@ public class UserService {
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 이메일입니다"));
 
-        if (!user.getPasswd().equals(request.getPasswd())){
+        if (!passwordEncoder.matches(request.getPasswd(), user.getPasswd())){
             throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
         }
         return new LoginResponse(

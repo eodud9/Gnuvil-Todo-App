@@ -2,6 +2,7 @@ package com.gnuvil.todo_list.service;
 
 import com.gnuvil.todo_list.domain.LoginRequest;
 import com.gnuvil.todo_list.domain.LoginResponse;
+import com.gnuvil.todo_list.domain.SignupRequest;
 import com.gnuvil.todo_list.domain.User;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -22,40 +23,41 @@ class UserServiceTest {
     UserService userService;
     @Test
     public void 회원추가(){
-        User user = new User();
-        user.setEmail("minhyeong63@gmail.com");
-        user.setPasswd("0000");
-        user.setName("김민형");
-        userService.join(user);
+        SignupRequest signupRequest = new SignupRequest();
+        signupRequest.setEmail("min@naber.com");
+        signupRequest.setName("김민형");
+        signupRequest.setPasswd("1234");
+        userService.join(signupRequest);
     }
     @Test
     public void findByEmail(){
-        User user = new User();
-        user.setEmail("minhyeon@gmail.com");
-        user.setPasswd("0000");
-        user.setName("김민형");
-        userService.join(user);
-        String email = user.getEmail();
+        SignupRequest signupRequest = new SignupRequest();
+        signupRequest.setEmail("min@naber.com");
+        signupRequest.setName("김민형");
+        signupRequest.setPasswd("1234");
+        userService.join(signupRequest);
+        String email = signupRequest.getEmail();
         Optional<User> findUser = userService.findByEmail(email);
-        Assertions.assertThat(user.getId()).isEqualTo(findUser.get().getId());
+        Assertions.assertThat(signupRequest.getEmail()).isEqualTo(findUser.get().getEmail());
 
     }
 
     @Test
     public void login(){
-        User user = new User();
-        user.setEmail("minhyeong123@gmail.com");
-        user.setPasswd("0000");
-        user.setName("김민형");
-        userService.join(user);
+        SignupRequest signupRequest = new SignupRequest();
+        signupRequest.setEmail("minhyeong123@gmail.com");
+        signupRequest.setPasswd("0000");
+        signupRequest.setName("김민형");
+        userService.join(signupRequest);
 
         LoginRequest loginRequest = new LoginRequest();
-        loginRequest.setEmail(user.getEmail());
-        loginRequest.setPasswd(user.getPasswd());
+        loginRequest.setEmail("minhyeong123@gmail.com");
+        loginRequest.setPasswd("0000");
 
         LoginResponse login = userService.login(loginRequest);
-        Assertions.assertThat(login.getEmail()).isEqualTo(user.getEmail());
+        Assertions.assertThat(login.getEmail()).isEqualTo("minhyeong123@gmail.com");
 
+        System.out.println("login = " + login.getEmail());
 
     }
 

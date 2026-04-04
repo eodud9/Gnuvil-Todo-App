@@ -1,5 +1,6 @@
 package com.gnuvil.todo_list.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.Getter;
@@ -21,6 +22,7 @@ public class User {
     private String email;
 
     @Column(nullable = false)
+    @JsonIgnore //findAll과 findOne에서 passwd가 빠짐
     private String passwd;
 
     @Column(nullable = false)
